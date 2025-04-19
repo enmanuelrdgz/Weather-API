@@ -4,14 +4,17 @@ import lombok.*;
 
 import java.io.Serializable;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
 @Data
 public class Weather implements Serializable {
     private String dateTime;
     private String description;
     private String address;
     private double temperature;
+
+    public Weather(String dateTime, String description, String address, double temperature) {
+        this.dateTime = dateTime;
+        this.description = description;
+        this.address = address;
+        this.temperature = temperature;
+    }
 }
