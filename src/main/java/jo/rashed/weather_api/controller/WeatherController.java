@@ -22,10 +22,10 @@ public class WeatherController {
 
 
     @Value("${VISUAL_CROSSING_API_KEY}")
-    private String API_KEY;
+    private String API_KEY = "key";
 
 
-    @GetMapping("{country}")
+    @GetMapping("/country")
     @Cacheable(value = "weather_single", key = "#country")
     public Weather getWeather(@PathVariable String country) throws JsonProcessingException {
         String url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + country + "/?key=" + API_KEY;
@@ -44,9 +44,7 @@ public class WeatherController {
         String todayDescription = today.get("description").asText();
         double temperature = fahrenheitToCelsius(today.get("temp").asDouble());
 
-        var todayWeather = new Weather(todayDate, todayDescription, address, temperature);
-
-        return todayWeather;
+        return new Weather(todayDate, todayDescription, address, temperature);
 
     }
 
